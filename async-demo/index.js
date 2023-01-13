@@ -6,7 +6,7 @@ function getRepositories(user){
     getRepositories(user.gitHubUsername,getCommits)
 }
 function getCommits(){
-    getCommits(repo,displayCommits)
+    getCommits(repos,displayCommits)
 }
 function displayCommits(commits){
 console.log(commits)
@@ -22,6 +22,21 @@ function getUser(id){
     },2000);
 })
 }
+
+// getUser(1)
+//   .then(user=>getRepositories(user.gitHubUsername))
+//   .then(repos=>getCommits([repos[0]]))
+//   .then(commits=>console.log('Commits',commits))
+//   .catch(err=>console.log('Err',err.message))
+
+  //Async and Await
+async function displayCommits(){
+    const user=await getUser(1);
+    const repos=await getRepositories(user.gitHubUsername)
+    const commits=await getCommits(repos[0])
+    console.log(commits);
+}
+displayCommits()
 
 function getRepositories(username){
 return new Promise((resolve,reject)=>{
