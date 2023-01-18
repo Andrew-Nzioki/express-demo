@@ -18,12 +18,12 @@ async function createCourse(){
 
     const course= new Course({
         name:' js course',
-        author:'Chuwa',
+        author:'Himo',
         tags:['node','backend'],
         isPublished:false
  });
  const result=await course.save();
- console.log(result)
+ result.f
 
 }
 createCourse();
