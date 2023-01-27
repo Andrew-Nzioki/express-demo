@@ -23,12 +23,19 @@ const Course = mongoose.model('Course', courseSchema);
 // }
 
 async function updateCourse(id) {
-  const course = await Course.findById(id);
-  if (!course) return;
-  course.isPublished = true;
-  course.author = 'Another one';
-  course._id = id;
-  const result = await course.save();
+  const result = await Course.updateOne(
+    { _id: id },
+    {
+      $set: {
+        author: 'Mosh',
+        isPublished: false,
+      },
+    }
+  );
   console.log(result);
 }
-updateCourse('5a68fdc3615eda645bc6bdec');
+async function removeCourse(id) {
+  const result = await Course.deleteOne({ _id: id });
+  console.log(result);
+}
+removeCourse('5a68fdc3615eda645bc6bdec');
